@@ -63,47 +63,47 @@
     resMock.end = function() {};
     sinon.spy(resMock, "send");
     
-    describe('dbOptions Function', function() {
-        it('DB created successfully', function() {
-            reqMock.params.option = 'create';
-            //mockcloudant.db.create = function( key, callback ){
-            //    callback( false, '' );  
-            //};
+//     describe('dbOptions Function', function() {
+//         it('DB created successfully', function() {
+//             reqMock.params.option = 'create';
+//             //mockcloudant.db.create = function( key, callback ){
+//             //    callback( false, '' );  
+//             //};
             
-            items.dbOptions( reqMock, resMock );
-            assert( resMock.send.lastCall.calledWith( { msg: 'Successfully created database and populated!' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-        });
+//             items.dbOptions( reqMock, resMock );
+//             assert( resMock.send.lastCall.calledWith( { msg: 'Successfully created database and populated!' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//         });
         
-        it('DB not created - cloudant failure', function() {
-            reqMock.params.option = 'create';  
-            mockdb.cloudant.db.create = function( key, callback ){
-                callback( 'Failed to contact server.', '' );  
-            };
+//         it('DB not created - cloudant failure', function() {
+//             reqMock.params.option = 'create';  
+//             mockdb.cloudant.db.create = function( key, callback ){
+//                 callback( 'Failed to contact server.', '' );  
+//             };
             
-            items.dbOptions( reqMock, resMock );
-            assert( resMock.send.lastCall.calledWith( { msg: 'Failed to contact server.' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-        });
+//             items.dbOptions( reqMock, resMock );
+//             assert( resMock.send.lastCall.calledWith( { msg: 'Failed to contact server.' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//         });
         
-        it('DB deleted successfully', function() {  
-            reqMock.params.option = 'delete';  
-            mockdb.cloudant.db.destroy = function( key, callback ){
-                callback( false, '' );  
-            };
+//         it('DB deleted successfully', function() {  
+//             reqMock.params.option = 'delete';  
+//             mockdb.cloudant.db.destroy = function( key, callback ){
+//                 callback( false, '' );  
+//             };
             
-            items.dbOptions( reqMock, resMock );
-            assert( resMock.send.lastCall.calledWith( { msg: 'Successfully deleted db items!' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );          
-        });
+//             items.dbOptions( reqMock, resMock );
+//             assert( resMock.send.lastCall.calledWith( { msg: 'Successfully deleted db items!' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );          
+//         });
         
-        it('DB not deleted - cloudant failure', function() {
-            reqMock.params.option = 'delete';
-            mockdb.cloudant.db.destroy = function( key, callback ){
-                callback( 'Failed to contact server.', '' );  
-            };
+//         it('DB not deleted - cloudant failure', function() {
+//             reqMock.params.option = 'delete';
+//             mockdb.cloudant.db.destroy = function( key, callback ){
+//                 callback( 'Failed to contact server.', '' );  
+//             };
             
-            items.dbOptions( reqMock, resMock );
-            assert( resMock.send.lastCall.calledWith( { msg: 'Error deleting db items: Failed to contact server.' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-        });     
-    });  
+//             items.dbOptions( reqMock, resMock );
+//             assert( resMock.send.lastCall.calledWith( { msg: 'Error deleting db items: Failed to contact server.' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//         });     
+//     });  
     
 //     describe('create Function', function() {
 //         it('Item created successfully', function() {
@@ -162,12 +162,12 @@
             };
             
             items.list( reqMock, resMock );
-            assert( resMock.send.lastCall.calledWith( 'test body' ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+            assert( resMock.send.lastCall.calledWith( 'test body Failed' ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
         });
         
         it('Db content not listed - db error', function() {
             mockdb.itemsDb.list = function( arg, callback ){
-                callback( 'forced error', 'test body', 'headers' );  
+                callback( 'forced error', 'test body Failed', 'headers' );  
             };
             
             items.list( reqMock, resMock );
@@ -231,7 +231,7 @@
             };
             
             items.remove( reqMock, resMock );
-            assert( resMock.send.lastCall.calledWith( { msg: 'Successfully deleted item' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+            assert( resMock.send.lastCall.calledWith( { msg: 'Successfully deleted item FAILED' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
         });
         
         it('Item not removed - error on destroy', function() {
